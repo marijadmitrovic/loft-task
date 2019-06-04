@@ -1,13 +1,40 @@
 <?php
 
+/**
+ * Class DeliveryNote
+ */
 class DeliveryNote implements JsonSerializable
 {
+    /**
+     * @var string
+     */
     private $startLocation;
+    /**
+     * @var string
+     */
     private $endLocation;
+    /**
+     * @var string
+     */
     private $transportMethod;
+    /**
+     * @var string
+     */
     private $deliveryCompany;
 
-    public function __construct($startLocation = '', $endLocation = '', $transportMethod = ' ', $deliveryCompany = '')
+    /**
+     * DeliveryNote constructor.
+     *
+     * @param string $startLocation
+     * @param string $endLocation
+     * @param string $transportMethod
+     * @param string $deliveryCompany
+     */
+    public function __construct(
+        string $startLocation,
+        string $endLocation,
+        string $transportMethod,
+        string $deliveryCompany)
     {
 
         $this->startLocation = $startLocation;

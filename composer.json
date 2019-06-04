@@ -1,13 +1,21 @@
 {
-    "name": "marija/kurzor",
-    "authors": [
-        {
-            "name": "Marija Dmitrovic",
-            "email": "dmitrovic@kurzor.net"
-        }
-    ],
-    "require": {},
-    "require-dev": {
-        "codeception/codeception": "^3.0"
+  "name": "marija/kurzor",
+  "authors": [
+    {
+      "name": "Marija Dmitrovic",
+      "email": "dmitrovic@kurzor.net"
     }
+  ],
+  "require": {},
+  "require-dev": {
+    "codeception/codeception": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "": [
+        "src/"
+      ],
+      "Tests\\": "tests/"
+    }
+  }
 }
