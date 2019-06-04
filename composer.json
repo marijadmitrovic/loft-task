@@ -1,0 +1,10 @@
+{
+    "name": "marija/kurzor",
+    "authors": [
+        {
+            "name": "Marija Dmitrovic",
+            "email": "dmitrovic@kurzor.net"
+        }
+    ],
+    "require": {}
+}

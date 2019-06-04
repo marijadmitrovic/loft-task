@@ -1,2 +1,3 @@
 # PhpStorm / IDEA
 .idea/*
+/vendor/
