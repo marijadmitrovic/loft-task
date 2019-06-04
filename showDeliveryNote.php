@@ -1,7 +1,25 @@
 <?php
 include "src/DeliveryNote.php";
-if (isset($_GET['jsonFile'])) {
-    $jsonData = file_get_contents($_GET['jsonFile']);
+
+if (isset($_POST['submit'])) {
+    $fileName = $_FILES['jsonFile']['name'];
+    $tempName = $_FILES['jsonFile']['tmp_name'];
+
+    if (isset($fileName)) {
+        if (!empty($fileName)) {
+            $location = "Files/";
+            $file = $location . $fileName;
+            if (move_uploaded_file($tempName, $file)) {
+                echo "The file uploaded";
+            } else {
+                echo "File was not uploaded";
+            }
+        }
+    }
+}
+
+if (isset($file) && !empty($file)) {
+    $jsonData = file_get_contents($file);
     $json = json_decode($jsonData, true);
     $outputList = "<ol>";
     foreach ($json['notes'] as $note) {
