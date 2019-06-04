@@ -6,13 +6,12 @@
     </head>
     <body>
         <div class="container">
-            <h1>Delivery Note</h1>
-            <h4>List of delivery :</h4>
-            <?php
-                include "showDeliveryNote.php";
-            ?>
+            <h1>Upload json file</h1>
+            <form action="showDeliveryNote.php" enctype="multipart/form-data" method="GET" >
+                <input type="file" name="jsonFile" id="jsonFile" accept="application/json">
+                <input type="submit" name="submit" value=" Upload " >
+            </form>
         </div>
     </body>
 </html>
-
 
