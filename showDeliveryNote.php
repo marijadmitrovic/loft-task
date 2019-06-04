@@ -1,7 +1,6 @@
 <?php
-
 include "src/DeliveryNote.php";
-if (isset($_GET['submit'])) {
+if (isset($_GET['jsonFile'])) {
     $jsonData = file_get_contents($_GET['jsonFile']);
     $json = json_decode($jsonData, true);
     $outputList = "<ol>";
@@ -17,3 +16,4 @@ if (isset($_GET['submit'])) {
 } else {
     echo "Please upload the file !";
 }
+
