@@ -6,5 +6,8 @@
             "email": "dmitrovic@kurzor.net"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "codeception/codeception": "^3.0"
+    }
 }
