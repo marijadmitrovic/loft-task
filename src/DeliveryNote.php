@@ -8,19 +8,22 @@ class DeliveryNote implements JsonSerializable
     /**
      * @var string
      */
-    private $startLocation;
+    protected $startLocation;
+
     /**
      * @var string
      */
-    private $endLocation;
+    protected $endLocation;
+
     /**
      * @var string
      */
-    private $transportMethod;
+    protected $transportMethod;
+
     /**
      * @var string
      */
-    private $deliveryCompany;
+    protected $deliveryCompany;
 
     /**
      * DeliveryNote constructor.
@@ -34,8 +37,8 @@ class DeliveryNote implements JsonSerializable
         string $startLocation,
         string $endLocation,
         string $transportMethod,
-        string $deliveryCompany)
-    {
+        string $deliveryCompany
+    ) {
 
         $this->startLocation = $startLocation;
         $this->endLocation = $endLocation;
