@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * Class DeliveryNoteTest
+ */
 class DeliveryNoteTest extends \Codeception\Test\Unit
 {
 
-    public function testGetterSetter()
+    /**
+     * Test getters and setters
+     */
+    public function testGetterSetter(): void
     {
         $deliveryNote = new DeliveryNote('Prague', 'Viena', 'Truck', 'City');
 
