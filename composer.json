@@ -6,7 +6,9 @@
       "email": "dmitrovic@kurzor.net"
     }
   ],
-  "require": {},
+  "require": {
+    "justinrainbow/json-schema": "^5.2"
+  },
   "require-dev": {
     "codeception/codeception": "^3.0"
   },
