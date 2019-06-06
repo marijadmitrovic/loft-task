@@ -29,3 +29,7 @@ codecept run --steps
 
 For more information, visit the site
 [Codeception](https://codeception.com/)
+
+## JSON schema validation
+
+To make sure that the correct JSON data will be the forwarded to the script UploadFile class use [justinrainbow/json-schema](https://github.com/justinrainbow/json-schema) library.
