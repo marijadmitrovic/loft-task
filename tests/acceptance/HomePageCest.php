@@ -16,7 +16,6 @@ class HomePageCest
         $I->see('Upload json file', 'h1');
         $I->seeElement('#jsonFile');
         $I->click('Upload');
-        $I->seeResponseCodeIs(200);
-        $I->see('Please upload the file !');
+        $I->see('JSON does not validate.');
     }
 }
