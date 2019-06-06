@@ -3,5 +3,5 @@
 require "vendor/autoload.php";
 
 $result = new UploadFile();
-$result->returnOrderedList();
-$result->returnJsonObject();
+$result->formatOrderedList();
+$result->formatJsonObject();

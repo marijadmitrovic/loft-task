@@ -8,9 +8,9 @@
 class UploadFile
 {
     /**
-     * Return json object in ordered list
+     * Ordered list format
      */
-    public function returnOrderedList()
+    public function formatOrderedList(): void
     {
         if (isset($_POST['submit'])) {
             $fileName = $_FILES['jsonFile']['name'];
@@ -61,11 +61,9 @@ class UploadFile
     }
 
     /**
-     * Return json in object format
-     *
-     * @return object
+     * Json format
      */
-    public function returnJsonObject(): object
+    public function formatJsonObject(): void
     {
         if (isset($_POST['submit'])) {
             $fileName = $_FILES['jsonFile']['name'];

@@ -5,10 +5,11 @@
 Using PHP without frameworks, the exception is the section 'Tests' where Codeception is used.
 
 ## Let's start
+### How to execute?
 This is a simple GUI app ,where in the input field put the JSON file and the PHP class `DeliveryNote` returns a complete ordered list (here I was confused do I need back in the order list format or in JSON format, so in `showDeliveryNote.php` I put both).
 
 
-## Test
+### Run the test
 For testing I used Codeception.
 * First, install via Composer:
 ```bash
@@ -32,4 +33,4 @@ For more information, visit the site
 
 ## JSON schema validation
 
-To make sure that the correct JSON data will be the forwarded to the script UploadFile class use [justinrainbow/json-schema](https://github.com/justinrainbow/json-schema) library.
+To make sure that the correct JSON data will be forwarded to the script UploadFile class use [justinrainbow/json-schema](https://github.com/justinrainbow/json-schema) library.
