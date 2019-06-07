@@ -1,5 +1,9 @@
 <?php
 
+namespace Delivery ;
+
+use JsonSerializable;
+
 /**
  * Class DeliveryNote
  */

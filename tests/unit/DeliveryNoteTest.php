@@ -1,5 +1,7 @@
 <?php
 
+use Delivery\DeliveryNote;
+
 /**
  * Class DeliveryNoteTest
  */

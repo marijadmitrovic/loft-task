@@ -1,5 +1,10 @@
 <?php
 
+namespace UploadFiles;
+
+use JsonSchema\Validator;
+use Delivery\DeliveryNote;
+
 /**
  * Class UploadFile
  *
@@ -27,7 +32,7 @@ class UploadFile
             $jsonData = file_get_contents($file);
             $schema = file_get_contents('schema.json');
             $objectSchema = (object)$schema;
-            $validator = new JsonSchema\Validator;
+            $validator = new Validator();
             $validator->validate($jsonData, $objectSchema);
 
             if ($validator->isValid()) {
@@ -53,7 +58,7 @@ class UploadFile
             }
         } else {
             echo "JSON does not validate. Violations:\n";
-            $validator = new JsonSchema\Validator;
+            $validator = new Validator();
             foreach ($validator->getErrors() as $error) {
                 echo sprintf("[%s] %s\n", $error['property'], $error['message']);
             }
@@ -62,6 +67,7 @@ class UploadFile
 
     /**
      * Json format
+     *
      */
     public function formatJsonObject(): void
     {
@@ -80,7 +86,7 @@ class UploadFile
             $jsonData = file_get_contents($file);
             $schema = file_get_contents('schema.json');
             $objectSchema = (object)$schema;
-            $validator = new JsonSchema\Validator;
+            $validator = new Validator();
             $validator->validate($jsonData, $objectSchema);
 
             if ($validator->isValid()) {
