@@ -20,7 +20,7 @@ class DeliveryNoteService
     /**
      * DeliveryNoteService constructor.
      */
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->file = $file;
     }
@@ -28,7 +28,7 @@ class DeliveryNoteService
     /**
      * @param $file
      */
-    public function getDataAsOrderedList($file): void
+    public function getDataAsOrderedList(string $file): void
     {
         if (isset($file) && !empty($file)) {
             $validator = $this->parseFile($file);
@@ -43,7 +43,7 @@ class DeliveryNoteService
     /**
      * @param $file
      */
-    public function getListAsJsonObject($file): void
+    public function getListAsJsonObject(string $file): void
     {
         if (isset($file) && !empty($file)) {
             $validator = $this->parseFile($file);
@@ -60,7 +60,7 @@ class DeliveryNoteService
      *
      * @return Validator
      */
-    protected function parseFile($file): Validator
+    protected function parseFile(string $file): Validator
     {
         $jsonData = file_get_contents($file);
         $schema = file_get_contents('schema.json');
@@ -73,7 +73,7 @@ class DeliveryNoteService
     /**
      * @param $file
      */
-    protected function orderList($file): void
+    protected function orderList(string $file): void
     {
         $jsonData = file_get_contents($file);
         $json = json_decode($jsonData, true);
@@ -93,7 +93,7 @@ class DeliveryNoteService
     /**
      * @param $file
      */
-    protected function getJsonObject($file): void
+    protected function getJsonObject(string $file): void
     {
         $jsonData = file_get_contents($file);
         $json = json_decode($jsonData, true);
