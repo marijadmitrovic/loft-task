@@ -16,6 +16,6 @@ class HomePageCest
         $I->see('Upload json file', 'h1');
         $I->seeElement('#jsonFile');
         $I->click('Upload');
-        $I->see('JSON does not validate.');
+        $I->see('Please upload file!');
     }
 }

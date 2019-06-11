@@ -6,25 +6,35 @@ use JsonSerializable;
 
 /**
  * Class DeliveryNote
+ *
+ * @package Delivery
  */
 class DeliveryNote implements JsonSerializable
 {
     /**
+     * Start the location point
+     *
      * @var string
      */
     protected $startLocation;
 
     /**
+     * End the location point
+     *
      * @var string
      */
     protected $endLocation;
 
     /**
+     * Transport method
+     *
      * @var string
      */
     protected $transportMethod;
 
     /**
+     * Delivery company
+     *
      * @var string
      */
     protected $deliveryCompany;
@@ -117,7 +127,7 @@ class DeliveryNote implements JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return
             [

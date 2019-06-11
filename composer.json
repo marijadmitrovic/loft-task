@@ -10,7 +10,7 @@
     "justinrainbow/json-schema": "^5.2"
   },
   "require-dev": {
-    "codeception/codeception": "^3.0"
+    "codeception/codeception": "^2.5"
   },
   "autoload": {
     "psr-4": {

@@ -1,9 +1,13 @@
 <?php
 
-use UploadFiles\UploadFile;
+use DeliveryNoteService\DeliveryNoteService;
+use Files\FileUploader;
 
 require_once "vendor/autoload.php";
 
-$result = new UploadFile();
-$result->formatOrderedList();
-$result->formatJsonObject();
+$uploader = new FileUploader();
+$fileName = $uploader->moveFileToFolder();
+
+$deliveryNoteService = new DeliveryNoteService($fileName);
+$deliveryNoteService->getDataAsOrderedList($fileName);
+$deliveryNoteService->getListAsJsonObject($fileName);
