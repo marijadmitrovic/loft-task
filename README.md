@@ -6,7 +6,7 @@ Using PHP without frameworks, the exception is the section `Tests` where Codecep
 
 ## Let's start
 ### How to execute?
-This is a simple GUI app ,where in the input field put the JSON file and the PHP class `DeliveryNote` returns a complete ordered list (here I was confused do I need back in the order list format or in JSON format, so in `showDeliveryNote.php` I put both).
+This is a simple GUI app, wherein the input field put the JSON file and the PHP class `DeliveryNote` returns a complete ordered list (here I was confused to do I need back in the order list format or in JSON format, so in `showDeliveryNote.php` I put both).
 
 
 ### Run the test
@@ -33,7 +33,7 @@ For more information, visit the site
 
 ### JSON schema validation
 
-To make sure that the correct JSON data will be forwarded to the script UploadFile class use [justinrainbow/json-schema](https://github.com/justinrainbow/json-schema) library.
+To make sure that the correct JSON data will be forwarded to the script UploadFile class uses [justinrainbow/json-schema](https://github.com/justinrainbow/json-schema) library.
 
 #### ShowDeliveryNoteCest (testShowDeliveryNoteContent())
 
