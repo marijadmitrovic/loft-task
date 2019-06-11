@@ -31,6 +31,11 @@ codecept run --steps
 For more information, visit the site
 [Codeception](https://codeception.com/)
 
-## JSON schema validation
+### JSON schema validation
 
 To make sure that the correct JSON data will be forwarded to the script UploadFile class use [justinrainbow/json-schema](https://github.com/justinrainbow/json-schema) library.
+
+#### ShowDeliveryNoteCest (testShowDeliveryNoteContent())
+
+The test should be to show the data from the uploaded Json file, needs to be fixed.
+I could not find the reason why the test doesn't show the Json data correctly.
