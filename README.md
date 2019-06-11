@@ -2,7 +2,7 @@
 
 ## About
 **Loft-task** is PHP implementation that can accept any set of delivery notes. 
-Using PHP without frameworks, the exception is the section 'Tests' where Codeception is used.
+Using PHP without frameworks, the exception is the section `Tests` where Codeception is used.
 
 ## Let's start
 ### How to execute?
