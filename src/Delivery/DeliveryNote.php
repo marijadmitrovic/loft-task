@@ -14,28 +14,28 @@ class DeliveryNote implements JsonSerializable
     /**
      * Start the location point
      *
-     * @var string
+     * @var string|null
      */
     protected $startLocation;
 
     /**
      * End the location point
      *
-     * @var string
+     * @var string|null
      */
     protected $endLocation;
 
     /**
      * Transport method
      *
-     * @var string
+     * @var string|null
      */
     protected $transportMethod;
 
     /**
      * Delivery company
      *
-     * @var string
+     * @var string|null
      */
     protected $deliveryCompany;
 
@@ -63,7 +63,7 @@ class DeliveryNote implements JsonSerializable
     /**
      * @return string
      */
-    public function getStartLocation()
+    public function getStartLocation(): string
     {
         return $this->startLocation;
     }
@@ -79,7 +79,7 @@ class DeliveryNote implements JsonSerializable
     /**
      * @return string
      */
-    public function getEndLocation()
+    public function getEndLocation(): string
     {
         return $this->endLocation;
     }
@@ -95,7 +95,7 @@ class DeliveryNote implements JsonSerializable
     /**
      * @return string
      */
-    public function getTransportMethod()
+    public function getTransportMethod(): string
     {
         return $this->transportMethod;
     }

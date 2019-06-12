@@ -38,4 +38,5 @@ To make sure that the correct JSON data will be forwarded to the script UploadFi
 #### ShowDeliveryNoteCest (testShowDeliveryNoteContent())
 
 The test should be to show the data from the uploaded Json file, needs to be fixed.
-I could not find the reason why the test doesn't show the Json data correctly.
+Upload file functionality in PHP browser is not working for unknown reasons. 
+It is not appending the file into POST.

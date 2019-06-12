@@ -19,7 +19,7 @@ class FileUploader
         $fileName = $_FILES['jsonFile']['name'];
         $tempName = $_FILES['jsonFile']['tmp_name'];
         if (isset($fileName) && !empty($fileName)) {
-            $location = "Files/";
+            $location = "files/";
             $file = $location . $fileName;
             move_uploaded_file($tempName, $file);
         }
