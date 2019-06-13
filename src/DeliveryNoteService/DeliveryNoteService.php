@@ -18,9 +18,14 @@ class DeliveryNoteService
     private $file;
 
     /**
+     * @var DeliveryNote[]
+     */
+    protected $deliveryNotes = [];
+
+    /**
      * DeliveryNoteService constructor.
      */
-    public function __construct(string $file)
+    public function __construct(?string $file)
     {
         $this->file = $file;
     }
@@ -28,27 +33,12 @@ class DeliveryNoteService
     /**
      * @param $file
      */
-    public function getDataAsOrderedList(string $file): void
+    public function getListAsJsonObject(?string $file): void
     {
         if (isset($file) && !empty($file)) {
             $validator = $this->parseFile($file);
             if ($validator->isValid()) {
                 $this->orderList($file);
-            }
-        } else {
-            echo "Please upload file!";
-        }
-    }
-
-    /**
-     * @param $file
-     */
-    public function getListAsJsonObject(string $file): void
-    {
-        if (isset($file) && !empty($file)) {
-            $validator = $this->parseFile($file);
-            if ($validator->isValid()) {
-                $this->getJsonObject($file);
             }
         } else {
             echo "Please upload file!";
@@ -71,41 +61,101 @@ class DeliveryNoteService
     }
 
     /**
-     * @param $file
+     * @param string $fileName
      */
-    protected function orderList(string $file): void
+    protected function loadJsonFile(string $fileName): void
     {
-        $jsonData = file_get_contents($file);
+        // get json file and make array
+        $jsonData = file_get_contents($fileName);
         $json = json_decode($jsonData, true);
-        $outputList = "<ol>";
-        foreach ($json['notes'] as $note) {
-            $outputList .= "<li>From " . $note['startLocation'];
-            $outputList .= " to " . $note['endLocation'];
-            $outputList .= " by " . $note['transportMethod'];
-            $outputList .= " &#40; " . $note['deliveryCompany']
-                . " &#41; </li>";
-            $outputList .= "<br>";
+
+        // check if there are some errors
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            die("JSON error: " . json_last_error_msg());
         }
-        $outputList .= "</ol>";
-        echo $outputList;
+
+        // put data in DeliveryNote class
+        foreach ($json as $note) {
+            $deliverNote = new DeliveryNote('', '', '', '');
+            $deliverNote->setStartLocation($note['startLocation']);
+            $deliverNote->setEndLocation($note['endLocation']);
+            $deliverNote->setTransportMethod($note['transportMethod']);
+            $deliverNote->setDeliveryCompany($note['deliveryCompany']);
+
+            $this->deliveryNotes[$note['startLocation']] = $deliverNote;
+        }
     }
 
     /**
      * @param $file
      */
-    protected function getJsonObject(string $file): void
+    protected function orderList(string $file)
     {
-        $jsonData = file_get_contents($file);
-        $json = json_decode($jsonData, true);
-        foreach ($json['notes'] as $note) {
-            $newDeliverNote = new DeliveryNote(
-                $note['startLocation'],
-                $note['endLocation'],
-                $note['transportMethod'],
-                $note['deliveryCompany']
-            );
-            $outputList = json_encode($newDeliverNote);
-            echo $outputList;
+        $this->loadJsonFile($file);
+
+        // make copy
+        $deliveryNotes = $this->deliveryNotes;
+
+        // make empty array where we need to put ordered json objects
+        /** @var DeliveryNote[] $orderedArray */
+        $orderedArray = [];
+
+        // find start point of new array
+        $startLocation = $this->findStartLocation($deliveryNotes);
+
+        // removed DeliveryNote from $deliveryNotes array and put like start point in ordered array
+        unset($deliveryNotes[$startLocation->getStartLocation()]);
+        $orderedArray[] = $startLocation;
+
+        // get next DeliveryNote, put in ordered array and set as start point
+        while (true) {
+            $nextDeliveryNote = $this->findNextStep($deliveryNotes, $startLocation);
+
+            if (null == $nextDeliveryNote) {
+                break;
+            }
+
+            unset($deliveryNotes[$startLocation->getStartLocation()]);
+            $orderedArray[] = $nextDeliveryNote;
+            $startLocation = $nextDeliveryNote;
+        }
+
+        // output ordered Json objects
+        $outputJsonList = json_encode($orderedArray);
+        echo $outputJsonList;
+    }
+
+    /**
+     * @param $deliveryNotes
+     *
+     * @return DeliveryNote
+     */
+    protected function findStartLocation(array $deliveryNotes): DeliveryNote
+    {
+        foreach ($deliveryNotes as $deliveryNote) {
+            $startLocation = $deliveryNote->getStartLocation();
+
+            foreach ($deliveryNotes as $deliveryNote2) {
+                if ($startLocation == $deliveryNote2->getEndLocation()) {
+                    continue 2;
+                }
+            }
+            return $deliveryNote;
+        }
+        // this should not happen for unbroken chain
+        return null;
+    }
+
+    /**
+     * @param array|DeliveryNote[] $deliveryNotes
+     * @param DeliveryNote         $startLocation
+     */
+    protected function findNextStep(array $deliveryNotes, DeliveryNote $startLocation)
+    {
+        foreach ($deliveryNotes as $deliveryNote) {
+            if ($deliveryNote->getStartLocation() == $startLocation->getEndLocation()) {
+                return $deliveryNote;
+            }
         }
     }
 }

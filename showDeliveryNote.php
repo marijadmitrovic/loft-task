@@ -9,5 +9,4 @@ $uploader = new FileUploader();
 $fileName = $uploader->moveFileToFolder();
 
 $deliveryNoteService = new DeliveryNoteService($fileName);
-$deliveryNoteService->getDataAsOrderedList($fileName);
 $deliveryNoteService->getListAsJsonObject($fileName);
