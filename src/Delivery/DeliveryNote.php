@@ -40,27 +40,6 @@ class DeliveryNote implements JsonSerializable
     protected $deliveryCompany;
 
     /**
-     * DeliveryNote constructor.
-     *
-     * @param string $startLocation
-     * @param string $endLocation
-     * @param string $transportMethod
-     * @param string $deliveryCompany
-     */
-    public function __construct(
-        string $startLocation,
-        string $endLocation,
-        string $transportMethod,
-        string $deliveryCompany
-    ) {
-
-        $this->startLocation = $startLocation;
-        $this->endLocation = $endLocation;
-        $this->transportMethod = $transportMethod;
-        $this->deliveryCompany = $deliveryCompany;
-    }
-
-    /**
      * @return string
      */
     public function getStartLocation(): string

@@ -4,6 +4,7 @@ namespace DeliveryNoteService;
 
 use Delivery\DeliveryNote;
 use JsonSchema\Validator;
+use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * Class DeliveryNoteService
@@ -76,7 +77,7 @@ class DeliveryNoteService
 
         // put data in DeliveryNote class
         foreach ($json as $note) {
-            $deliverNote = new DeliveryNote('', '', '', '');
+            $deliverNote = new DeliveryNote();
             $deliverNote->setStartLocation($note['startLocation']);
             $deliverNote->setEndLocation($note['endLocation']);
             $deliverNote->setTransportMethod($note['transportMethod']);
@@ -149,13 +150,15 @@ class DeliveryNoteService
     /**
      * @param array|DeliveryNote[] $deliveryNotes
      * @param DeliveryNote         $startLocation
+     * @return DeliveryNote|null
      */
-    protected function findNextStep(array $deliveryNotes, DeliveryNote $startLocation)
+    protected function findNextStep(array $deliveryNotes, ?DeliveryNote $startLocation): ?DeliveryNote
     {
         foreach ($deliveryNotes as $deliveryNote) {
             if ($deliveryNote->getStartLocation() == $startLocation->getEndLocation()) {
                 return $deliveryNote;
             }
         }
+        return null;
     }
 }
