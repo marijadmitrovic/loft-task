@@ -4,12 +4,9 @@ namespace DeliveryNoteService;
 
 use Delivery\DeliveryNote;
 use JsonSchema\Validator;
-use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * Class DeliveryNoteService
- *
- * @package DeliveryNoteService
  */
 class DeliveryNoteService
 {
@@ -25,6 +22,8 @@ class DeliveryNoteService
 
     /**
      * DeliveryNoteService constructor.
+     *
+     * @param string|null $file
      */
     public function __construct(?string $file)
     {
@@ -32,7 +31,7 @@ class DeliveryNoteService
     }
 
     /**
-     * @param $file
+     * @param string|null $file
      */
     public function getListAsJsonObject(?string $file): void
     {
@@ -47,7 +46,7 @@ class DeliveryNoteService
     }
 
     /**
-     * @param $file
+     * @param string $file
      *
      * @return Validator
      */
@@ -66,16 +65,16 @@ class DeliveryNoteService
      */
     protected function loadJsonFile(string $fileName): void
     {
-        // get json file and make array
+        // Get json file and make array.
         $jsonData = file_get_contents($fileName);
         $json = json_decode($jsonData, true);
 
-        // check if there are some errors
+        // Check if there are some errors.
         if (json_last_error() !== JSON_ERROR_NONE) {
             die("JSON error: " . json_last_error_msg());
         }
 
-        // put data in DeliveryNote class
+        // Put data in DeliveryNote class.
         foreach ($json as $note) {
             $deliverNote = new DeliveryNote();
             $deliverNote->setStartLocation($note['startLocation']);
@@ -88,46 +87,50 @@ class DeliveryNoteService
     }
 
     /**
-     * @param $file
+     * @param string $file
      */
-    protected function orderList(string $file)
+    protected function orderList(string $file): void
     {
         $this->loadJsonFile($file);
 
-        // make copy
+        // Make copy.
         $deliveryNotes = $this->deliveryNotes;
 
-        // make empty array where we need to put ordered json objects
+        // Make empty array where we need to put ordered json objects.
         /** @var DeliveryNote[] $orderedArray */
         $orderedArray = [];
 
-        // find start point of new array
+        // Find start point of new array.
         $startLocation = $this->findStartLocation($deliveryNotes);
 
-        // removed DeliveryNote from $deliveryNotes array and put like start point in ordered array
+        // Removed DeliveryNote from $deliveryNotes array and put like start point in ordered array.
         unset($deliveryNotes[$startLocation->getStartLocation()]);
         $orderedArray[] = $startLocation;
 
-        // get next DeliveryNote, put in ordered array and set as start point
+        // Get next DeliveryNote, put in ordered array and set as start point.
         while (true) {
             $nextDeliveryNote = $this->findNextStep($deliveryNotes, $startLocation);
+            unset($deliveryNotes[$startLocation->getStartLocation()]);
 
-            if (null == $nextDeliveryNote) {
+            if (null === $nextDeliveryNote) {
+                if (!empty($deliveryNotes)) {
+                    die("Error: broken chain of delivery notes");
+                }
+
                 break;
             }
 
-            unset($deliveryNotes[$startLocation->getStartLocation()]);
             $orderedArray[] = $nextDeliveryNote;
             $startLocation = $nextDeliveryNote;
         }
 
-        // output ordered Json objects
+        // Output ordered Json objects.
         $outputJsonList = json_encode($orderedArray);
         echo $outputJsonList;
     }
 
     /**
-     * @param $deliveryNotes
+     * @param array $deliveryNotes
      *
      * @return DeliveryNote
      */
@@ -150,9 +153,10 @@ class DeliveryNoteService
     /**
      * @param array|DeliveryNote[] $deliveryNotes
      * @param DeliveryNote         $startLocation
+     *
      * @return DeliveryNote|null
      */
-    protected function findNextStep(array $deliveryNotes, ?DeliveryNote $startLocation): ?DeliveryNote
+    protected function findNextStep(array $deliveryNotes, DeliveryNote $startLocation): ?DeliveryNote
     {
         foreach ($deliveryNotes as $deliveryNote) {
             if ($deliveryNote->getStartLocation() == $startLocation->getEndLocation()) {

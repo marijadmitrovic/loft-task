@@ -1,10 +1,4 @@
 [
-        {
-	"startLocation": "Porto International Airport, Portugal",
-	"endLocation": "Adolfo Suárez Madrid–Barajas Airport, Spain",
-	"transportMethod": "Van",
-	"deliveryCompany": "AnyVan"
-	},
 	{
 	"startLocation": "Adolfo Suárez Madrid–Barajas Airport, Spain",
 	"endLocation": "London Heathrow, UK",
@@ -24,3 +18,4 @@
 	"deliveryCompany": "Correios"
 	}
 ]
+
