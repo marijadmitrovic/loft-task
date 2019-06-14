@@ -6,36 +6,35 @@ use JsonSerializable;
 
 /**
  * Class DeliveryNote
- *
- * @package Delivery
  */
 class DeliveryNote implements JsonSerializable
 {
+
     /**
      * Start the location point
      *
-     * @var string|null
+     * @var string
      */
     protected $startLocation;
 
     /**
      * End the location point
      *
-     * @var string|null
+     * @var string
      */
     protected $endLocation;
 
     /**
      * Transport method
      *
-     * @var string|null
+     * @var string
      */
     protected $transportMethod;
 
     /**
      * Delivery company
      *
-     * @var string|null
+     * @var string
      */
     protected $deliveryCompany;
 

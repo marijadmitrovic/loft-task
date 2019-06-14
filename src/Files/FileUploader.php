@@ -5,7 +5,6 @@ namespace Files;
 /**
  * Class UploadFile
  *
- * @package UploadFiles
  */
 class FileUploader
 {
